@@ -1,0 +1,160 @@
+scene: igibson
+scene_id: Beechwood_0_int
+hide_robot: false
+build_graph: true
+load_texture: true
+pybullet_load_texture: true
+trav_map_type: no_obj
+trav_map_resolution: 0.1
+trav_map_erosion: 3
+should_open_all_doors: true
+
+# domain randomization
+texture_randomization_freq: null
+object_randomization_freq: null
+
+# number of clustering sample
+sample_number: [10]
+
+
+# table position
+table_pos: [-3.7, -3.9,  0.1]
+
+# spawn position, where the object spwaned
+# x_position: [-3.824310490380494, -3.5756895096195063]
+# y_position: [-3.9819795964351323, -3.8180204035648675]
+x_position: [-3.5, -3.9]
+y_position: [-3.9, -3.9]
+
+# vierwer initial position
+
+# 45 degree view:
+# viewer_pos: [-3.1, -4.5, 1.5]
+# viewer_direction: [-0.6, 0.7 ,-0.4]
+
+# horizontal view:
+# viewer_pos: [-2.8, -4.0, 1.2]
+# viewer_direction: [-1.0, 0.1, -0.3]
+
+# vertical view:
+# viewer_pos: [-3.7, -3.8, 1.5]
+# viewer_direction: [-0.0, -0.1, -1.0]
+
+# front view:
+# viewer_pos: [-3.7, -4.9, 1.2]
+# viewer_direction: [-0.0, 1.0, 0.1]
+
+# upper front view:
+viewer_pos: [-3.7, -4.7, 1.5]
+viewer_direction: [-0.0, 0.9, -0.5]
+
+
+# task obj
+grasp_obj: 'mug'
+
+# desired spawn category
+desired_category: [
+        'mug',
+        'cup'
+        ]
+
+# random_categories = [
+#         'watch',
+#         'eggplant',
+#         'alarm',
+#         'steak',
+#         'ring',
+#         'pasta',
+#         'cupcake',
+#         'cup',
+#         'cucumber',
+#         'package',
+#         'newspaper',
+#         'mushroom',
+#         'mug',
+#         'mousetrap',
+#         'mouse',
+#         'tea_bag',
+#         'teapot'
+
+# robot
+robot:
+  name: Fetch
+  action_type: continuous
+  action_normalize: true
+  proprio_obs:
+    - eef_0_pos
+    - eef_0_quat
+    - trunk_qpos
+    - arm_0_qpos_sin
+    - arm_0_qpos_cos
+    - gripper_0_qpos
+    - grasp_main
+  reset_joint_pos: null
+  base_name: null
+  scale: 1.0
+  self_collision: true
+  rendering_params: null
+  grasping_mode: physical
+  rigid_trunk: false
+  default_trunk_offset: 0.365
+  default_arm_pose: vertical
+  controller_config:
+    base:
+      name: DifferentialDriveController
+    arm_0:
+      name: InverseKinematicsController
+      kv: 2.0
+    gripper_0:
+      name: MultiFingerGripperController
+      mode: binary
+    camera:
+      name: JointController
+      use_delta_commands: False
+
+
+# sensor spec
+output: [rgb, depth, scan, occupancy_grid]
+# image
+# Primesense Carmine 1.09 short-range RGBD sensor
+# http://xtionprolive.com/primesense-carmine-1.09
+fisheye: false
+image_width: 512
+image_height: 512
+vertical_fov: 90
+# depth
+depth_low: 0.35
+depth_high: 3.0
+# scan
+# SICK TIM571 scanning range finder
+# https://docs.fetchrobotics.com/robot_hardware.html
+# n_horizontal_rays is originally 661, sub-sampled 1/3
+n_horizontal_rays: 220
+n_vertical_beams: 1
+laser_linear_range: 25.0
+laser_angular_range: 220.0
+min_laser_dist: 0.05
+laser_link_name: laser_link
+
+# Objects to prevent from loading into the scene
+not_load_object_categories: [
+    breakfast_table,
+    pool_table,
+    straight_chair,
+    armchair,
+    coffee_table,
+    console_table,
+    pedestal_table,
+    gaming_table,
+    bed
+]
+
+# sensor noise
+depth_noise_rate: 0.0
+scan_noise_rate: 0.0
+
+# visual objects
+visible_target: false
+visible_path: false
+
+collision_ignore_link_a_ids: [0, 1, 2]  # ignore collisions with these robot links

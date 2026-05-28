@@ -43,8 +43,8 @@ class MotionPlanningWrapper(object):
         fine_motion_plan=True,
         full_observability_2d_planning=False,
         collision_with_pb_2d_planning=False,
-        visualize_2d_planning=False,
-        visualize_2d_result=False,
+        visualize_2d_planning=True,
+        visualize_2d_result=True,
     ):
         """
         Get planning related parameters.
@@ -457,8 +457,9 @@ class MotionPlanningWrapper(object):
 
         allow_collision_links = []
         if self.robot_type == "Fetch" and not override_fetch_collision_links:
-            allow_collision_links = [self.robot.eef_links[self.robot.default_arm].link_id] + [
-                finger.link_id for finger in self.robot.finger_links[self.robot.default_arm]
+            allow_collision_links = [
+                # self.robot.eef_links[self.robot.default_arm].link_id] + [
+                # finger.link_id for finger in self.robot.finger_links[self.robot.default_arm]
             ]
         arm_path = plan_joint_motion(
             self.robot_id,
